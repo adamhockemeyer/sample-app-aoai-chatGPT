@@ -95,4 +95,4 @@ stages:
               azureSubscription: $(azureServiceConnectionId)
               appName: $(webAppName)
               package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
-              appSettings: -DEBUG True
+              appSettings: -SCM_DO_BUILD_DURING_DEPLOYMENT true -DEBUG True
