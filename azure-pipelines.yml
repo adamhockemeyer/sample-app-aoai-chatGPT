@@ -39,6 +39,16 @@ stages:
       displayName: 'Use Python $(pythonVersion)'
 
     - script: |
+        npm install
+      workingDirectory: $(projectRoot)/frontend
+      displayName: "Install frontend NPM packages"
+
+    - script: |
+        npm run build
+      workingDirectory: $(projectRoot)/frontend
+      displayName: "Build frontend and copy static files out"
+
+    - script: |
         python -m venv antenv
         source antenv/bin/activate
         python -m pip install --upgrade pip
@@ -85,3 +95,4 @@ stages:
               azureSubscription: $(azureServiceConnectionId)
               appName: $(webAppName)
               package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
+              appSettings: -DEBUG True
